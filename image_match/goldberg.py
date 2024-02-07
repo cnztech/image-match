@@ -253,7 +253,9 @@ class ImageSignature(object):
             else:
                 return rgb2gray(arr)
         elif type(image_or_path) is np.ndarray:
-            return rgb2gray(image_or_path)
+            if len(image_or_path.shape) == 3 and image_or_path.shape[2] == 3:
+                return rgb2gray(image_or_path)
+            return image_or_path
         else:
             raise TypeError('Path or image required.')
 

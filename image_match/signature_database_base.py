@@ -404,7 +404,10 @@ def get_words(array, k, N):
             words[i] = array[pos:pos+k]
         else:
             temp = array[pos:].copy()
-            temp.resize(k)
+            try:
+                temp.resize(k)
+            except ValueError:
+                temp = np.resize(temp, k)
             words[i] = temp
 
     return words

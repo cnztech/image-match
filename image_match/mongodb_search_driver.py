@@ -86,7 +86,12 @@ class SignatureMongoSearch(SignatureDatabaseBase):
         self.collection.create_index({'path': 1}, unique=True)
     
     def delete_image(self, path):
+        """Delete an image from the database."""
         self.collection.delete_one({'path': path})
+
+    def is_image_existing(self, path):
+        """Check if an image is already in the database."""
+        return True if self.collection.find_one({'path': path}) else False
 
     def _stringify_simple_words(self, rec):
         result = {}
